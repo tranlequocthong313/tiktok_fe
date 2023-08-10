@@ -5,9 +5,9 @@ import {
     faSpinner,
     faMagnifyingGlass,
     faEllipsisVertical,
-    faEarthAsia,
     faCircleQuestion,
     faKeyboard,
+    faLanguage,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 import { useState } from 'react';
@@ -21,11 +21,39 @@ import Menu from '~/components/Popper/Menu';
 
 const cx = classNames.bind(styles);
 
-const MENU_ITEMS = [
-    { icon: <FontAwesomeIcon icon={faEarthAsia} />, title: 'English' },
-    { icon: <FontAwesomeIcon icon={faCircleQuestion} />, title: 'Feedback and help', to: '/feedback' },
-    { icon: <FontAwesomeIcon icon={faKeyboard} />, title: 'Keyboard shortcuts' },
-];
+const MENU_ITEMS = {
+    root: ['language', 'feedback_and_help', 'keyboard_shortcuts'],
+    language: {
+        icon: <FontAwesomeIcon icon={faLanguage} />,
+        title: 'English',
+        children: ['en', 'vn', 'it'],
+        subMenuTitle: 'Language',
+    },
+    feedback_and_help: {
+        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+        title: 'Feedback and help',
+        to: '/feedback',
+    },
+    keyboard_shortcuts: {
+        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        title: 'Keyboard shortcuts',
+    },
+    en: {
+        type: 'language',
+        title: 'English',
+        code: 'en',
+    },
+    vn: {
+        type: 'language',
+        title: 'Tiếng Việt',
+        code: 'vn',
+    },
+    it: {
+        type: 'language',
+        title: 'Italiano',
+        code: 'it',
+    },
+};
 
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
