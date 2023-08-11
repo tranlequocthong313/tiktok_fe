@@ -7,8 +7,8 @@ import Upload from '~/components/pages/Upload';
 const publicRoutes = [
     { path: '/', Component: Home },
     { path: '/following', Component: Following },
-    { path: '/profile', Component: Profile },
     { path: '/upload', Component: Upload, Layout: HeaderOnly },
+    { path: '/:nickname', Component: Profile },
 ];
 
 const privateRoutes = [];

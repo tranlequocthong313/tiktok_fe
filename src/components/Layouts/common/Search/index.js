@@ -16,6 +16,7 @@ function Search() {
     const [searchResult, setSearchResult] = useState([]);
     const [keyword, setKeyword] = useState('');
     const [showResult, setShowResult] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
 
@@ -29,8 +30,19 @@ function Search() {
         setShowResult(false);
     }
 
-    // test
-    useEffect(() => setSearchResult([1, 1, 1]), []);
+    useEffect(() => {
+        if (keyword.trim()) {
+            setLoading(true);
+            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(keyword)}&type=less`)
+                .then((res) => res.json())
+                .then(({ data }) => {
+                    setSearchResult(data);
+                })
+                .finally(() => setLoading(false));
+        } else {
+            setSearchResult([]);
+        }
+    }, [keyword]);
 
     return (
         <HeadlessTippy
@@ -38,29 +50,8 @@ function Search() {
                 <div className={cx('search-result')} tabIndex={-1} {...attrs}>
                     <Popper>
                         <h4 className={cx('search-label')}>Accounts</h4>
-                        {[
-                            {
-                                name: 'NguyenVanA',
-                                username: 'Nguyen Van A',
-                                avatar: 'https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/d8cba623a40db08b0acd4ddcc512bdd5~c5_100x100.jpeg?x-expires=1691805600&x-signature=DL%2FQG63dMOWFSvBUY4XTMwkPY8Q%3D',
-                            },
-                            {
-                                name: 'NguyenVanA',
-                                username: 'Nguyen Van A',
-                                avatar: 'https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/d8cba623a40db08b0acd4ddcc512bdd5~c5_100x100.jpeg?x-expires=1691805600&x-signature=DL%2FQG63dMOWFSvBUY4XTMwkPY8Q%3D',
-                            },
-                            {
-                                name: 'NguyenVanA',
-                                username: 'Nguyen Van A',
-                                avatar: 'https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/d8cba623a40db08b0acd4ddcc512bdd5~c5_100x100.jpeg?x-expires=1691805600&x-signature=DL%2FQG63dMOWFSvBUY4XTMwkPY8Q%3D',
-                            },
-                            {
-                                name: 'NguyenVanA',
-                                username: 'Nguyen Van A',
-                                avatar: 'https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/d8cba623a40db08b0acd4ddcc512bdd5~c5_100x100.jpeg?x-expires=1691805600&x-signature=DL%2FQG63dMOWFSvBUY4XTMwkPY8Q%3D',
-                            },
-                        ].map((account, index) => (
-                            <AccountItem key={index} account={account} onClick={() => alert('clicked')} />
+                        {searchResult.map((account) => (
+                            <AccountItem key={account.id} account={account} />
                         ))}
                     </Popper>
                 </div>
@@ -78,12 +69,12 @@ function Search() {
                     value={keyword}
                     onFocus={() => setShowResult(true)}
                 />
-                {!!keyword && (
+                {!!keyword && !loading && (
                     <button className={cx('clear')} onClick={clearInput}>
                         <FontAwesomeIcon icon={faCircleXmark} />
                     </button>
                 )}
-                {/* <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
+                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
                 <button className={cx('search-btn')}>
                     <SearchIcon />
                 </button>
