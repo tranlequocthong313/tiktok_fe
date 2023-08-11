@@ -51,7 +51,7 @@ function Menu({ children, items = {}, onChangeMenuItem = (item) => {} }) {
                     </Popper>
                 </div>
             )}
-            delay={[0, 700]}
+            delay={[0, 600]}
             interactive
             placement="bottom-end"
             onHide={onHideMenu}
