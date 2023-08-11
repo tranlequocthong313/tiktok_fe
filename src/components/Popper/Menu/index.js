@@ -15,10 +15,8 @@ function Menu({ children, items = {}, onChangeMenuItem = (item) => {} }) {
 
     function getMenu() {
         const res = [];
-        for (let key of Object.keys(items)) {
-            if (history[history.length - 1].includes(key)) {
-                res.push(items[key]);
-            }
+        for (const key of history[history.length - 1]) {
+            res.push(items[key]);
         }
         return res;
     }
@@ -42,6 +40,7 @@ function Menu({ children, items = {}, onChangeMenuItem = (item) => {} }) {
 
     return (
         <Tippy
+            offset={[12, 8]}
             render={(attrs) => (
                 <div className={cx('menu')} tabIndex="-1" {...attrs}>
                     <Popper>
