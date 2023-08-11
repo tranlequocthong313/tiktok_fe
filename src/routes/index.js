@@ -1,19 +1,19 @@
 import { Fragment } from 'react';
 
-import { HeaderOnly } from '~/components/Layouts';
+import { HeaderOnly } from '~/layouts';
 import Following from '~/components/pages/Following';
 import Home from '~/components/pages/Home';
 import Profile from '~/components/pages/Profile';
 import Search from '~/components/pages/Search';
 import Upload from '~/components/pages/Upload';
-import routes from '~/config/routes';
+import config from '~/config';
 
 const publicRoutes = [
-    { path: routes.root, Component: Home },
-    { path: routes.following, Component: Following },
-    { path: routes.upload, Component: Upload, Layout: HeaderOnly },
-    { path: routes.profile, Component: Profile },
-    { path: routes.search, Component: Search, Layout: Fragment },
+    { path: config.routes.root, Component: Home },
+    { path: config.routes.following, Component: Following },
+    { path: config.routes.upload, Component: Upload, Layout: HeaderOnly },
+    { path: config.routes.profile, Component: Profile },
+    { path: config.routes.search, Component: Search, Layout: Fragment },
 ];
 
 const privateRoutes = [];
