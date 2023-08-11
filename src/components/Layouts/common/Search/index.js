@@ -9,8 +9,11 @@ import styles from './Search.module.scss';
 import { Popper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
+import useDebounce from '~/hooks/useDebounce';
 
 const cx = classNames.bind(styles);
+
+const DEBOUNCED_MS = 500;
 
 function Search() {
     const [searchResult, setSearchResult] = useState([]);
@@ -19,6 +22,8 @@ function Search() {
     const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
+
+    const debounedValue = useDebounce(keyword, DEBOUNCED_MS);
 
     function clearInput() {
         setKeyword('');
@@ -31,9 +36,9 @@ function Search() {
     }
 
     useEffect(() => {
-        if (keyword.trim()) {
+        if (debounedValue.trim()) {
             setLoading(true);
-            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(keyword)}&type=less`)
+            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounedValue)}&type=less`)
                 .then((res) => res.json())
                 .then(({ data }) => {
                     setSearchResult(data);
@@ -42,7 +47,7 @@ function Search() {
         } else {
             setSearchResult([]);
         }
-    }, [keyword]);
+    }, [debounedValue]);
 
     return (
         <HeadlessTippy
