@@ -45,9 +45,11 @@ function Menu({ children, items = {}, hideOnClick = false, onChangeMenuItem = (i
                 <div className={cx('menu')} tabIndex="-1" {...attrs}>
                     <Popper>
                         {history.length > 1 && <MenuHeader title={subMenuTitle} onBack={goBack} />}
-                        {getMenu().map((item, index) => (
-                            <MenuItem key={index} item={item} onClick={() => onClickMenuItem(item)} />
-                        ))}
+                        <div className={cx('menu-body')}>
+                            {getMenu().map((item, index) => (
+                                <MenuItem key={index} item={item} onClick={() => onClickMenuItem(item)} />
+                            ))}
+                        </div>
                     </Popper>
                 </div>
             )}
