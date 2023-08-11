@@ -11,7 +11,7 @@
     input {
         flex: 1;
         height: 100%;
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         color: var(--black);
         background-color: transparent;
         caret-color: var(--primary);
@@ -42,7 +42,7 @@
     right: calc(var(--search-button-width) + 16px);
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: rgba(22, 24, 35, 0.34);
     cursor: pointer;
     padding: 8px 2px;

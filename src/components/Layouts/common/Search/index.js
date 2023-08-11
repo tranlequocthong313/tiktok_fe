@@ -10,6 +10,7 @@ import { Popper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import useDebounce from '~/hooks/useDebounce';
+import searchService from '~/services/searchService';
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +24,7 @@ function Search() {
 
     const inputRef = useRef();
 
-    const debounedValue = useDebounce(keyword, DEBOUNCED_MS);
+    const debouncedKeyword = useDebounce(keyword, DEBOUNCED_MS);
 
     function clearInput() {
         setKeyword('');
@@ -36,18 +37,17 @@ function Search() {
     }
 
     useEffect(() => {
-        if (debounedValue.trim()) {
+        if (debouncedKeyword.trim()) {
             setLoading(true);
-            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounedValue)}&type=less`)
-                .then((res) => res.json())
-                .then(({ data }) => {
-                    setSearchResult(data);
-                })
+            searchService
+                .search(debouncedKeyword)
+                .then((data) => setSearchResult(data))
+                .catch((e) => console.log(e))
                 .finally(() => setLoading(false));
         } else {
             setSearchResult([]);
         }
-    }, [debounedValue]);
+    }, [debouncedKeyword]);
 
     return (
         <HeadlessTippy
