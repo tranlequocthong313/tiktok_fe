@@ -18,7 +18,7 @@ function AccountItem({ account: { avatar, full_name, tick, nickname } }) {
                     <span>{full_name}</span>
                     {tick && <FontAwesomeIcon className={cx('check-icon')} icon={faCheckCircle} />}
                 </h4>
-                <span className={cx('username')}>{nickname}</span>
+                <span className={cx('nickname')}>{nickname}</span>
             </div>
         </Link>
     );
