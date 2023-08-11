@@ -19,7 +19,7 @@ const DEBOUNCED_MS = 500;
 function Search() {
     const [searchResult, setSearchResult] = useState([]);
     const [keyword, setKeyword] = useState('');
-    const [showResult, setShowResult] = useState(true);
+    const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
