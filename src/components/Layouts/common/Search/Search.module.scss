@@ -11,10 +11,11 @@
     input {
         flex: 1;
         height: 100%;
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         color: var(--black);
         background-color: transparent;
         caret-color: var(--primary);
+        font-family: var(--font-family);
     }
 
     input:not(:placeholder-shown)~.search-btn {

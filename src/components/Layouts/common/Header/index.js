@@ -13,6 +13,7 @@ import {
 import Tippy from '@tippyjs/react';
 import { Fragment } from 'react';
 import 'tippy.js/dist/tippy.css';
+import { Link } from 'react-router-dom';
 
 import images from '~/assets/images';
 import styles from './Header.module.scss';
@@ -20,7 +21,8 @@ import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
-import Search from '../Search';
+import Search from '~/components/Layouts/common/Search';
+import routes from '~/config/routes';
 
 const cx = classNames.bind(styles);
 
@@ -94,7 +96,9 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <img src={images.logo} alt="TikTok" />
+                <Link to={routes.root} className={cx('logo')}>
+                    <img src={images.logo} alt="TikTok" />
+                </Link>
 
                 <Search />
 
@@ -114,12 +118,13 @@ function Header() {
                             <Tippy delay={[0, TOOLTIP_DELAY_MS]} content="Inbox" placement="bottom">
                                 <button className={cx('action-btn')}>
                                     <InboxIcon />
+                                    <span className={cx('badge')}>12</span>
                                 </button>
                             </Tippy>
                         </Fragment>
                     ) : (
                         <Fragment>
-                            <Button text to="/upload">
+                            <Button text to={routes.upload}>
                                 Upload
                             </Button>
                             <Button primary>Login</Button>

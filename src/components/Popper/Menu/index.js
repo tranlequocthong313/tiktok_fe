@@ -9,7 +9,7 @@ import MenuHeader from './MenuHeader';
 
 const cx = classNames.bind(styles);
 
-function Menu({ children, items = {}, onChangeMenuItem = (item) => {} }) {
+function Menu({ children, items = {}, hideOnClick = false, onChangeMenuItem = (item) => {} }) {
     const [history, setHistory] = useState(!!items.root ? [items.root] : []);
     const [subMenuTitle, setSubMenuTitle] = useState('');
 
@@ -55,6 +55,7 @@ function Menu({ children, items = {}, onChangeMenuItem = (item) => {} }) {
             interactive
             placement="bottom-end"
             onHide={onHideMenu}
+            hideOnClick={hideOnClick}
         >
             {children}
         </Tippy>
