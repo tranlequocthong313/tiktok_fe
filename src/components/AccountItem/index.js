@@ -5,14 +5,14 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 import styles from './AccountItem.module.scss';
-import Image from '~/components/Image';
+import Avatar from '~/components/Avatar';
 
 const cx = classNames.bind(styles);
 
 function AccountItem({ account: { avatar, full_name, tick, nickname } }) {
     return (
         <Link className={cx('wrapper')} to={`/@${nickname}`}>
-            <Image className={cx('avatar')} src={avatar} alt={full_name} />
+            <Avatar src={avatar} alt={full_name} size={40} />
             <div className={cx('info')}>
                 <h4 className={cx('name')}>
                     <span>{full_name}</span>
