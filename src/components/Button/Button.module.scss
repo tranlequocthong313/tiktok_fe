@@ -72,6 +72,12 @@
     }
 }
 
+.text-outline {
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 1);
+}
+
 .small {
     min-width: 88px;
     padding: 4px 16px;
@@ -80,4 +86,10 @@
 .large {
     min-width: 140px;
     padding: 14px 16px;
+}
+
+.flex-one {
+    .title {
+        flex: 1;
+    }
 }

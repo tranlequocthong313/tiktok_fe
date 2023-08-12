@@ -11,7 +11,7 @@ import {
     faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
-import { Fragment } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import 'tippy.js/dist/tippy.css';
 import { Link } from 'react-router-dom';
 
@@ -23,6 +23,8 @@ import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '~/layouts/common/Search';
 import config from '~/config';
+import Modal from '~/components/Modal';
+import Auth from '~/components/Auth';
 
 const cx = classNames.bind(styles);
 
@@ -81,7 +83,7 @@ const MENU_ITEMS = {
     },
 };
 
-const user = true;
+const user = !true;
 
 if (user) {
     MENU_ITEMS.root.unshift('settings');
@@ -93,6 +95,10 @@ if (user) {
 const TOOLTIP_DELAY_MS = 80;
 
 function Header() {
+    const [isOpenLogin, setIsOpenLogin] = useState(false);
+
+    const closeAuthModal = useCallback(() => setIsOpenLogin(false), []);
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -127,7 +133,12 @@ function Header() {
                             <Button text to={config.routes.upload}>
                                 Upload
                             </Button>
-                            <Button primary>Login</Button>
+                            <Button primary onClick={() => setIsOpenLogin((prev) => !prev)}>
+                                Login
+                            </Button>
+                            <Modal isOpen={isOpenLogin} onRequestClose={() => setIsOpenLogin((prev) => !prev)}>
+                                <Auth close={closeAuthModal} />
+                            </Modal>
                         </Fragment>
                     )}
                     <Menu items={MENU_ITEMS}>

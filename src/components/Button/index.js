@@ -33,6 +33,7 @@ function Button({
     primary = false,
     outline = false,
     text = false,
+    textOutline = false,
     rounded = false,
     disabled = false,
     small = false,
@@ -41,6 +42,7 @@ function Button({
     rightIcon,
     className,
     children,
+    flexOne = false,
     ...args
 }) {
     removeEventsOnDisabled(disabled, args);
@@ -53,6 +55,8 @@ function Button({
         disabled,
         small,
         large,
+        'text-outline': textOutline,
+        'flex-one': flexOne,
         [className]: className,
     });
 
@@ -77,6 +81,7 @@ Button.propTypes = {
     classNames: PropTypes.string,
     leftIcon: PropTypes.node,
     rightIcon: PropTypes.node,
+    flexOne: PropTypes.bool,
 };
 
 export default Button;

@@ -107,3 +107,10 @@ body {
         top: -8px;
     }
 }
+
+// Custom css react modal 
+.ReactModal__Body--open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}

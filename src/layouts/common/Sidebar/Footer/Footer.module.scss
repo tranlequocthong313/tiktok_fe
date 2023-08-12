@@ -1,0 +1,23 @@
+.wrapper {
+    border-top: 1px solid #e3e3e4;
+    padding: 16px 0 0 8px;
+}
+
+.line {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.link {
+    color: rgba(22, 24, 35, .5);
+    margin: 5px 6px 0 0;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.copyright {
+    color: rgba(22, 24, 35, .5);
+}
